@@ -50,7 +50,7 @@ export async function POST(request: NextRequest) {
         const buffer = Buffer.from(bytes);
         const result = await new Promise<CloudinaryUploadResult>((resolve, reject) => {
             const uploadStream = cloudinary.uploader.upload_stream({
-                folder: "video-uploads",
+                folder: "saas/video-uploads",
                 resource_type: "video",
                 transformation: [
                     { quality: "auto", fetch_format: "mp4" },
@@ -78,8 +78,8 @@ export async function POST(request: NextRequest) {
         return NextResponse.json(video);
 
     } catch (error) {
-        console.log("error in image upload route", error);
-        return NextResponse.json({ message: "error in image upload route" }, { status: 500 });
+        console.log("error in video upload route", error);
+        return NextResponse.json({ message: "error in video upload route" }, { status: 500 });
     }
 
 }

@@ -30,8 +30,8 @@ export async function POST(request: NextRequest) {
 
         const bytes = await file.arrayBuffer();
         const buffer = Buffer.from(bytes);
-        const result =  await new Promise<CloudinaryUploadResult>((resolve, reject) => {
-            const uploadStream = cloudinary.uploader.upload_stream({ folder: "next-cloudinary-uploads" },
+        const result = await new Promise<CloudinaryUploadResult>((resolve, reject) => {
+            const uploadStream = cloudinary.uploader.upload_stream({ folder: "saas/next-cloudinary-uploads" },
                 (error, result) => {
                     if (error) {
                         return reject(error);
@@ -42,7 +42,7 @@ export async function POST(request: NextRequest) {
             uploadStream.end(buffer);
         })
 
-        return NextResponse.json({publicId : result.public_id}, { status: 200 });
+        return NextResponse.json({ publicId: result.public_id }, { status: 200 });
 
     } catch (error) {
         console.log("error in image upload route", error);
